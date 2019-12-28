@@ -3,7 +3,7 @@ import React from "react"
 function GeneratorBox() {
 
   function generateGradient() {
-    document.body.style.backgroundColor = "red";
+    document.body.style.backgroundImage = "linear-gradient(45deg, navy, orange)"
   }
 
   return (
