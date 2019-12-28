@@ -13,14 +13,30 @@ class App extends React.Component {
     this.generateGradient = this.generateGradient.bind(this)
   }
 
-  generateGradient() {
-    let gradientVal1 = Math.floor(Math.random() * HEXCODES) // This generates a random decimal number
-    gradientVal1 = gradientVal1.toString(16) // Turns the decimal number into a hexadecimal color code
+  // Formats incoming hexadecimal values that are shorter than 6 digits
+  hexFormat(hexCode) {
+    let difference = 6 - hexCode.length
 
-    let gradientVal2 = Math.floor(Math.random() * HEXCODES)
-    gradientVal2 = gradientVal2.toString(16)
+    if (difference) {
+      for (; difference > 0; difference--) {
+        hexCode = "0" + hexCode
+      }
+    }
+    return hexCode
+  }
+
+  generateHexCode() {
+    let gradientVal = Math.floor(Math.random() * HEXCODES) // This generates a random decimal number
+    gradientVal = this.hexFormat(gradientVal.toString(16)) // Turns the decimal number into a hexadecimal color code
+    return gradientVal
+  }
+
+  generateGradient() {
+    let gradientVal1 = this.generateHexCode()
+    let gradientVal2 = this.generateHexCode()
 
     this.setState({currentGradient: `linear-gradient(45deg, #${gradientVal1}, #${gradientVal2})`}, () => {
+      console.log(gradientVal1, gradientVal2)
       document.body.style.backgroundImage = this.state.currentGradient
     })
   }
