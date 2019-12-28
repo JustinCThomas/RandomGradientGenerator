@@ -11,6 +11,11 @@ class App extends React.Component {
       currentGradient: ""
     }
     this.generateGradient = this.generateGradient.bind(this)
+    setInterval(this.generateGradient, 1000 * 15)
+  }
+
+  componentDidMount() {
+    this.generateGradient()
   }
 
   // Formats incoming hexadecimal values that are shorter than 6 digits
